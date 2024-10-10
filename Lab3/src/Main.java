@@ -75,34 +75,13 @@ public class Main {
             }
         }
     }
-//    public static void ReadZip(String inputZipPath, String outputPath) throws IOException {
-//        File base = new File(outputPath);
-////        base.mkdirs();
-//        try (ZipInputStream zin = new ZipInputStream(
-//                new FileInputStream(inputZipPath))) {
-//            ZipEntry entry;
-//            while ((entry = zin.getNextEntry()) != null) {
-//                try (FileOutputStream fout = new FileOutputStream(
-//                        new File(base, entry.getName()))) {
-//                    for (int c = zin.read(); c != -1; c = zin.read()) {
-//                        fout.write(c);
-//                    }
-//                }
-//                zin.closeEntry();
-//            }
-//        }
-//    }
-
 
     public static void main(String[] args) throws Exception {
         String command = args[0];
-//        String command = "pack";
         String path_to_zip = args[1];
         String path_to_file = args[2];
-        String[] myStrings = {"Hello", "World", "Java"};
         try {
             if (Objects.equals(command, "pack")) {
-//                CreateZip("C:\\Users\\kroto\\IdeaProjects\\Prom_razrab\\Lab3\\notes.txt", "C:\\Users\\kroto\\IdeaProjects\\Prom_razrab\\Lab3\\output.zip");
                 CreateZip(path_to_file, path_to_zip);
             }
             else {
