@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class MyClassLoader extends  ClassLoader{
+public class MyClassLoader extends ClassLoader{
     private String[] classPaths;
     public MyClassLoader(String[] classPaths){
         this.classPaths = classPaths;
