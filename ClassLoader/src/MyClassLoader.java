@@ -6,21 +6,22 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class MyClassLoader extends ClassLoader{
-    private String[] classPaths;
+    private final String[] classPaths;
     public MyClassLoader(String[] classPaths){
         this.classPaths = classPaths;
     }
 
     @Override
-    public Class<?> findClass(String name) throws ClassNotFoundException{
+    protected Class<?> findClass(String name) throws ClassNotFoundException{
         byte[] classBytes = null;
 
         // Проходим по путям, пытаясь найти класс
         for (String path : classPaths) {
             try {
+                System.out.println(path);
                 // Формируем путь к классу
                 String classFilePath = path + File.separator + name.replace('.', File.separatorChar) + ".class";
-
+                System.out.println(classFilePath);
                 if (Files.exists(Paths.get(classFilePath))) {
                     try (InputStream inputStream = new FileInputStream(classFilePath)) {
                         classBytes = inputStream.readAllBytes();
