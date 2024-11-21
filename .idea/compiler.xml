@@ -6,9 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Lab2" />
-        <module name="Prom_razrab" />
+        <module name="Kristavichok" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Lab2" target="18" />
+      <module name="Prom_razrab" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

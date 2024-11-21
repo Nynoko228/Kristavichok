@@ -1,4 +1,5 @@
-package org.example;
+package Ships;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 class Ship {

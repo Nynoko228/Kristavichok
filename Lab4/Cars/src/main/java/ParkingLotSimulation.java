@@ -1,3 +1,5 @@
+package Cars.src.main.java;
+
 import java.util.Random;
 
 
@@ -45,7 +47,7 @@ class Parking {
 
         // Симуляция времени, проведенного на парковке
         try {
-            Thread.sleep(new Random().nextInt(500, 10000)); // 500 - 1000 мс
+            Thread.sleep(new Random().nextInt(501) + 500); // 500 - 1000 мс
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
