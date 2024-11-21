@@ -41,16 +41,16 @@ class ShipN {
         public void run() {
             try {
                 synchronized (dockAvailability) {
-                    if (occupiedDocks == DOCK_SIZE) {
+                    // Ожидаем свободного места если его нету
+                    while (occupiedDocks == DOCK_SIZE) {
                         dockAvailability.wait();
                     }
                     for (int j = 0; j < DOCK_SIZE; j++) {
                         if (!dockAvailability[j]) {
-                            System.out.printf("Корабль №%d прибыл в бухту.%n", vesselId);
+                            System.out.printf("Корабль №%d прибыл в бухту. Тип груза: %s. Количество: %d%n", vesselId, cargoType, cargoQuantity);
                             dockAvailability[j] = true;
                             dockIndex = j;
                             occupiedDocks++;
-                            System.out.printf(YELLOW + "Корабль №%d занял причал %d. Тип груза: %s. Количество: %d%n" + RESET, vesselId, dockIndex + 1, cargoType, cargoQuantity);
                             break;
                         }
                     }
@@ -68,23 +68,25 @@ class ShipN {
         }
 
         private void unload(String cargoName) throws InterruptedException {
-            synchronized (cargoName.intern()) {
-                synchronized (map) {
-                    map.put(cargoName, true);
-                }
+            synchronized (cargoName) {
+//                synchronized (map) {
+//                    map.put(cargoName, true);
+//                }
+                // Если судно прибыло в причал, то место в бухте освобождается
                 synchronized (dockAvailability) {
                     occupiedDocks--;
                     dockAvailability[dockIndex] = false;
                     dockAvailability.notify();
                 }
+                System.out.printf(YELLOW + "Корабль №%d занял причал для разгрузки товара типа %s.%n" + RESET, vesselId, cargoType);
                 for (int k = 0; k < cargoQuantity; k++) {
                     System.out.printf(RED + "С коробля №%d отгружается груз: %s %n" + RESET, vesselId, cargoName);
                     Thread.sleep(2000);
                 }
                 System.out.printf(GREEN + "%s разгружены, корабль №%d покидает порт.%n" + RESET, cargoName, vesselId);
-                synchronized (map) {
-                    map.put(cargoName, false);
-                }
+//                synchronized (map) {
+//                    map.put(cargoName, false);
+//                }
             }
         }
     }
