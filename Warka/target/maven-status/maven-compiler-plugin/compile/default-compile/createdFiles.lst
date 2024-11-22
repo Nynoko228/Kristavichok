@@ -1,2 +1,7 @@
+WebFilterServlet.class
+Bean.class
+DownloadServlet.class
 UploadServlet.class
+ActiveSessionListener.class
+MyFilter.class
 BaseServlet.class

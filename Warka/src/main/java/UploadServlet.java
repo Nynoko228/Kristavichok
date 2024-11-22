@@ -12,6 +12,12 @@ import java.io.IOException;
 @WebServlet("/uploadServlet")
 public class UploadServlet extends HttpServlet {
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        req.getRequestDispatcher("fileUpload.html").forward(req, resp);
+    }
+
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String uploadPath = getUploadBase();
@@ -25,6 +31,7 @@ public class UploadServlet extends HttpServlet {
         }
         req.getRequestDispatcher("fileUpload.html").forward(req, resp);
     }
+
     private String getUploadBase() {
        return System.getProperty("Zadani1");
     }

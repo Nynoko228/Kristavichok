@@ -1,5 +1,3 @@
-package Ships;
-
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.*;
 class ShipN {
@@ -68,7 +66,7 @@ class ShipN {
         }
 
         private void unload(String cargoName) throws InterruptedException {
-            synchronized (cargoName) {
+            synchronized (cargoName.intern()) {
 //                synchronized (map) {
 //                    map.put(cargoName, true);
 //                }

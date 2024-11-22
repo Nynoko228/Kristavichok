@@ -1,5 +1,3 @@
-package Philosophers;
-
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
@@ -90,7 +88,7 @@ class DiningTable {
         }
 
         for (int i = 0; i < NUMBER_OF_PHILOSOPHERS; i++) {
-            new Thread(new Philosopher(i, forks[i], forks[(i + 1) % NUMBER_OF_PHILOSOPHERS], 1000, 3000, 500, 2)).start();
+            new Thread(new Philosopher(i, forks[i], forks[(i + 1) % NUMBER_OF_PHILOSOPHERS], 1000, 3000, 500, 5)).start();
         }
     }
 }
