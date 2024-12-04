@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Форма отправки данных</title>
+</head>
+<body>
+
+<h1>Управление студентами</h1>
+
+<form action="base" method="post">
+    <table>
+        <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Почта</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="text" name="name" placeholder="Имя студента"></td>
+            <td><input type="email" name="email" placeholder="Почта студента"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <input type="hidden" name="action" value="add">
+    <button type="submit" name="submitAction" value="add">Добавить</button>
+    <button type="submit" name="submitAction" value="delete">Удалить</button>
+</form>
+<h2>Список студентов</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Почты</th>
+    </tr>
+    </thead>
+    <tbody>
+        ${students}
+    </tbody>
+</table>
+
+
+
+</body>
+</html>

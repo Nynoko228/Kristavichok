@@ -3,6 +3,7 @@ import javax.persistence.*;
 @Entity
 public class mail {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long mail_id;
 
     @ManyToOne
@@ -11,10 +12,13 @@ public class mail {
 
     private String mail_name;
 
-    public mail(long mail_id, Student student) {
-        this.mail_id = mail_id;
+    public mail(){}
+
+    public mail(Student student, String mail_name) {
         this.student = student;
+        this.mail_name = mail_name;
     }
+
 
     public Student getStudent() {
         return student;
@@ -26,5 +30,9 @@ public class mail {
 
     public void setMail_name(String mail_name) {
         this.mail_name = mail_name;
+    }
+
+    public String getMail_name() {
+        return mail_name;
     }
 }
