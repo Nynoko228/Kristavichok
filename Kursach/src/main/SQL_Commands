@@ -1,0 +1,16 @@
+SELECT
+    u.user_id AS id,
+    u.user_name AS имя,
+    u.password AS пароль,
+    r.role_name AS роль
+FROM
+    users u
+JOIN
+    security_user_role sur ON u.user_id = sur.user_id
+JOIN
+    role r ON sur.role_id = r.role_id;
+
+
+SELECT s.student_id, s.student_name, m.mail_id, m.mail_name
+FROM student s
+JOIN mail m ON s.student_id = m.student_id;
