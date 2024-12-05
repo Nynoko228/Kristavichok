@@ -8,6 +8,8 @@ public class Student {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long student_id;
 
+    // Связь 1 к N, осуществляем связь через поле student у класса mail,
+    // выполняем все каскадные функции, удаляем полностью, загружаем сразу при создании студента
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<mail> mails = new ArrayList<mail>();
 

@@ -2,12 +2,12 @@ import javax.persistence.*;
 
 @Entity
 public class mail {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id // mail_id - первичный ключ
+    @GeneratedValue(strategy=GenerationType.IDENTITY) // mail_id будет автоматически генерироваться с автоинкрементом
     private long mail_id;
 
-    @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
+    @ManyToOne // Связь N к 1
+    @JoinColumn(name = "student_id", nullable = false) // По столбцу student_id в таблице Mail будем связываться с таблицей Student
     private Student student;
 
     private String mail_name;

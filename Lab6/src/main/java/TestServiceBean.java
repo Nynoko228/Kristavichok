@@ -10,7 +10,7 @@ import java.util.List;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class TestServiceBean {
 
-    @PersistenceContext(name = "Students")
+    @PersistenceContext(name = "Students") // Подключаемся к DB
     private EntityManager entityManager;
 
     public void addStudent(String name, String m) {

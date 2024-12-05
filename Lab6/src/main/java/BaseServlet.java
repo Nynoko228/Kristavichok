@@ -10,7 +10,7 @@ import java.util.List;
 
 // Для запуска PostgreSQL ищием pgAdmin4
 
-@WebServlet("/base") // http://localhost:8080/application/base
+@WebServlet("/base")
 public class BaseServlet extends HttpServlet {
     @Inject
     TestServiceBean bean;
