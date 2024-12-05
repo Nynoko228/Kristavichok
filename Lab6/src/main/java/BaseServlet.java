@@ -29,19 +29,19 @@ public class BaseServlet extends HttpServlet {
             throws ServletException, IOException {
         String name = req.getParameter("name");
         String mail_name = req.getParameter("email");
-        if (name == null || mail_name == null) {
-            req.getRequestDispatcher("/error.jsp").forward(req, resp);
-            return;
-        }
+//        if (name == null || mail_name == null) {
+//            req.getRequestDispatcher("/error.jsp").forward(req, resp);
+//            return;
+//        }
         String action = req.getParameter("submitAction");
         if ("add".equals(action)) {
             bean.addStudent(name, mail_name);
         } else if ("delete".equals(action)) {
+            name = req.getParameter("student_id");
             bean.delStudent(Long.parseLong(name));
 
         }
         resp.sendRedirect(req.getContextPath() + "/base");
-//        process(null, null);
     }
 
     protected void process(HttpServletRequest req, HttpServletResponse resp)

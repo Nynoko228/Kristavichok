@@ -15,12 +15,18 @@
             margin: 0;
             font-family: Arial, sans-serif;
         }
-        form, table {
+        form, .table-container {
             margin-bottom: 20px;
+        }
+        .table-container {
+            max-height: 200px; /* 5 строк при высоте строки ~40px */
+            overflow-y: auto;
+            width: 80%;
+            border: 1px solid #ccc;
         }
         table {
             border-collapse: collapse;
-            width: 80%;
+            width: 100%;
         }
         th, td {
             border: 1px solid black;
@@ -41,57 +47,102 @@
             justify-content: center;
             margin-top: 20px;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
 <h1>Управление студентами</h1>
-
-<form action="base" method="post">
+<h2>Список студентов</h2>
+<div class="table-container">
     <table>
         <thead>
         <tr>
+            <th>ID</th>
             <th>Имя</th>
-            <th>Почта</th>
+            <th>Почты</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td><input type="text" name="name" placeholder="Имя студента" required></td>
-            <td><input type="email" name="email" placeholder="Почта студента" required></td>
-        </tr>
+            <c:forEach var="student" items="${students}">
+                <tr>
+                    <td><c:out value="${student.student_id}"/></td>
+                    <td><c:out value="${student.student_name}"/></td>
+                    <td>
+                        <c:forEach var="mail" items="${student.mails}">
+                            <c:out value="${mail.mail_name}"/><br>
+                        </c:forEach>
+                    </td>
+                </tr>
+            </c:forEach>
         </tbody>
     </table>
+</div>
 
+<form action="base" method="post">
     <div class="button-container">
-        <button type="submit" name="submitAction" value="add">Добавить</button>
-        <button type="submit" name="submitAction" value="delete">Удалить</button>
+        <button type="button" onclick="document.getElementById('addModal').style.display='block'">Добавить</button>
+        <button type="button" onclick="document.getElementById('deleteModal').style.display='block'">Удалить</button>
     </div>
 </form>
 
-<h2>Список студентов</h2>
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Имя</th>
-        <th>Почты</th>
-    </tr>
-    </thead>
-    <tbody>
-        <c:forEach var="student" items="${students}">
-            <tr>
-                <td><c:out value="${student.student_id}"/></td>
-                <td><c:out value="${student.student_name}"/></td>
-                <td>
-                    <c:forEach var="mail" items="${student.mails}">
-                        <c:out value="${mail.mail_name}"/>
-                    </c:forEach>
-                </td>
-            </tr>
-        </c:forEach>
-    </tbody>
-</table>
+<!-- Всплывающее окно для добавления -->
+<div id="addModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('addModal')">&times;</span>
+        <h2>Добавить студента</h2>
+        <form action="base" method="post">
+            <label for="modalName">Имя:</label>
+            <input type="text" id="modalName" name="name" required><br><br>
+            <label for="modalEmail">Почта:</label>
+            <input type="email" id="modalEmail" name="email" required><br><br>
+            <button type="submit" name="submitAction" value="add">Добавить</button>
+        </form>
+    </div>
+</div>
+
+<!-- Всплывающее окно для удаления -->
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('deleteModal')">&times;</span>
+        <h2>Удалить студента</h2>
+        <form action="base" method="post">
+            <label for="modalId">ID:</label>
+            <input type="text" id="modalId" name="student_id" required><br><br>
+            <button type="submit" name="submitAction" value="delete">Удалить</button>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>
